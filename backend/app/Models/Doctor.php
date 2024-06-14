@@ -10,16 +10,27 @@ class Doctor extends Model
     use HasFactory;
 
     protected $fillable = [
-        'first_name', 'last_name', 'specialization', 'license_number', 'phone', 'email'
+        'first_name',
+        'last_name',
+        'specialization',
+        'license_number',
+        'phone',
+        'email',
     ];
 
-    protected $table = 'doctors';  // Specify the table name
+    // Define the relationship with the User model
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
+    // Define the relationship with the Appointment model
     public function appointments()
     {
         return $this->hasMany(Appointment::class);
     }
 
+    // Define the relationship with the MedicalRecord model
     public function medicalRecords()
     {
         return $this->hasMany(MedicalRecord::class);

@@ -10,17 +10,30 @@ class Patient extends Model
     use HasFactory;
 
     protected $fillable = [
-        'first_name', 'last_name', 'date_of_birth', 'gender', 'address',
-        'phone', 'email', 'emergency_contact', 'medical_history'
+        'first_name',
+        'last_name',
+        'date_of_birth',
+        'gender',
+        'address',
+        'phone',
+        'email',
+        'emergency_contact',
+        'medical_history',
     ];
 
-    protected $table = 'patients';  // Specify the table name
+    // Define the relationship with the User model
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
+    // Define the relationship with the Appointment model
     public function appointments()
     {
         return $this->hasMany(Appointment::class);
     }
 
+    // Define the relationship with the MedicalRecord model
     public function medicalRecords()
     {
         return $this->hasMany(MedicalRecord::class);

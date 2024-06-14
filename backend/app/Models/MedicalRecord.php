@@ -10,19 +10,23 @@ class MedicalRecord extends Model
     use HasFactory;
 
     protected $fillable = [
-        'patient_id', 'doctor_id', 'visit_date', 'diagnosis', 'treatment', 'notes'
+        'patient_id',
+        'doctor_id',
+        'visit_date',
+        'diagnosis',
+        'treatment',
+        'notes',
     ];
 
-    protected $table = 'medical_records';  // Specify the table name
-
+    // Define the relationship with the Patient model
     public function patient()
     {
         return $this->belongsTo(Patient::class);
     }
 
+    // Define the relationship with the Doctor model
     public function doctor()
     {
         return $this->belongsTo(Doctor::class);
     }
 }
-
