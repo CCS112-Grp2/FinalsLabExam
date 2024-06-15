@@ -6,7 +6,7 @@ import Home from '../DashboardDesign/Doctor/Home';
 import ViewDoctors from '../DashboardDesign/Doctor/ViewDoctors';
 import ManagePatients from '../DashboardDesign/Doctor/ManagePatients';
 import ViewAppointments from '../DashboardDesign/Doctor/ViewAppointments';
-import ViewMedicalRecords from '../DashboardDesign/Doctor/ViewMedicalRecords';
+import ViewMedicalRecords from '../DashboardDesign/Doctor/ViewMedicalRecords'; // Import ViewMedicalRecords
 import '../DashboardDesign/Doctor/Dashboard.css';
 
 function DoctorDashboard() {
@@ -26,7 +26,7 @@ function DoctorDashboard() {
                     <Route path="view-doctors" element={<ViewDoctors />} />
                     <Route path="manage-patients" element={<ManagePatients />} />
                     <Route path="view-appointments" element={<ViewAppointments />} />
-                    <Route path="view-medical-records" element={<ViewMedicalRecords />} />
+                    <Route path="view-medical-records/:patientId" element={<ViewMedicalRecords />} /> {/* Route for ViewMedicalRecords */}
                 </Routes>
             </div>
         </div>
