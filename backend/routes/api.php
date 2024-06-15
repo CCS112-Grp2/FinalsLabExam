@@ -57,6 +57,20 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('doctors/{id}', [DoctorController::class, 'destroy']);
     });
 
+    // Receptionist routes
+    Route::middleware('role:receptionist')->group(function () {
+        Route::get('users', [UserController::class, 'index']);
+        Route::post('users/add', [UserController::class, 'store']);
+        Route::put('users/{id}', [UserController::class, 'update']);
+        Route::delete('users/{id}', [UserController::class, 'destroy']);
+
+        // Patient routes
+        Route::get('patients', [PatientController::class, 'index']);
+        Route::post('patients/add', [DoctorController::class, 'store']);
+        Route::put('patients/{id}', [DoctorController::class, 'update']);
+        Route::delete('patients/{id}', [DoctorController::class, 'destroy']);
+    });
+
     // Doctor routes
     Route::middleware('role:doctor')->group(function () {
         Route::get('patients', [PatientController::class, 'index']);
