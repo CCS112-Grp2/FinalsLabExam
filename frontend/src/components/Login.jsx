@@ -28,14 +28,14 @@ function Login() {
                 email,
                 password
             });
-            // Handle successful login
-            console.log(response.data);
+            const { token, role } = response.data;
+            localStorage.setItem('token', token);
+            localStorage.setItem('role', role);
             toast.success('Login successful!');
             setTimeout(() => {
-                navigate('/dashboard'); // Navigate to the dashboard or another protected route
-            }, 2000); // Delay to allow user to see the toast
+                navigate('/dashboard');
+            }, 2000);
         } catch (error) {
-            // Handle error
             setError(error.response.data.message);
             toast.error('Login failed: ' + error.response.data.message);
         }
