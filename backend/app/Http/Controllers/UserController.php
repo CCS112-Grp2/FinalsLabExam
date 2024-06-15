@@ -23,7 +23,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email|max:255',
             'password' => 'required|string|min:8',
-            'role' => 'required|string|in:admin,doctor,patient',
+            'role' => 'required|string|in:admin,doctor,receptionist,patient',
         ]);
 
         if ($validator->fails()) {

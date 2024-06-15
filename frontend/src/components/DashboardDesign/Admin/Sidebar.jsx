@@ -26,8 +26,8 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
           </Link>
         </li>
         <li className="sidebar-list-item">
-          <Link to="/dashboard/manage-patients" onClick={OpenSidebar}>
-            <BsPeopleFill className="icon" /> Manage Patients
+          <Link to="/dashboard/manage-users" onClick={OpenSidebar}>
+            <BsPeopleFill className="icon" /> Manage Users
           </Link>
         </li>
         <li className="sidebar-list-item">
