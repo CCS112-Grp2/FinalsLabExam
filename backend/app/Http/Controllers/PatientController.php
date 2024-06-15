@@ -7,12 +7,14 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class PatientController extends Controller
 {
     //create patient
     public function store(Request $request)
     {
+        // Validate the request
         $validator = Validator::make($request->all(), [
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
@@ -23,6 +25,8 @@ class PatientController extends Controller
             'email' => 'required|email|max:255',
             'emergency_contact' => 'required|string|max:255',
             'medical_history' => 'nullable|string',
+            'password' => 'required|string|min:8',
+            'name' => 'required|string|max:255',
         ]);
 
         if ($validator->fails()) {
@@ -34,19 +38,21 @@ class PatientController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'role' => 'patient',
+            'password' => Hash::make($request->password),
         ]);
 
         // Create the patient entry
         $patient = Patient::create([
-            'user_id' => $user->id,
+            'user_id' => $user->id, // Associate the patient with the user
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'date_of_birth' => $request->date_of_birth,
             'gender' => $request->gender,
+            'address' => $request->address,
             'phone' => $request->phone,
             'email' => $request->email,
             'emergency_contact' => $request->emergency_contact,
-            'medical_history' => $request->medical_history
+            'medical_history' => $request->medical_history,
         ]);
 
         return response()->json(['user' => $user, 'patient' => $patient], 201);

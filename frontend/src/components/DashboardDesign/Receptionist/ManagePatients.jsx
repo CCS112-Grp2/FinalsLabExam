@@ -37,7 +37,7 @@ function ManagePatients() {
   const handleAdd = () => {
     setCurrentPatient({
       id: '', first_name: '', last_name: '', date_of_birth: '', gender: '', address: '',
-      phone: '', email: '', emergency_contact: '', medical_history: ''
+      phone: '', email: '', emergency_contact: '', medical_history: '', password: '' // Add password field
     });
     setIsEditing(false);
     setShowModal(true);
@@ -69,16 +69,21 @@ function ManagePatients() {
 
   const handleSave = async () => {
     const token = localStorage.getItem('token');
+    const patientData = {
+      ...currentPatient,
+      name: `${currentPatient.first_name} ${currentPatient.last_name}` // Combine first and last name for the user's name
+    };
+  
     try {
       if (isEditing) {
-        await axios.put(`http://127.0.0.1:8000/api/reception-patients/${currentPatient.id}`, currentPatient, {
+        await axios.put(`http://127.0.0.1:8000/api/reception-patients/${currentPatient.id}`, patientData, {
           headers: {
             Authorization: `Bearer ${token}`
           }
         });
         toast.success('Patient updated successfully');
       } else {
-        const response = await axios.post('http://127.0.0.1:8000/api/reception-patients/add', currentPatient, {
+        const response = await axios.post('http://127.0.0.1:8000/api/reception-patients/add', patientData, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -91,7 +96,7 @@ function ManagePatients() {
       toast.error('Failed to save patient: ' + (error.response?.data?.message || error.message));
     }
   };
-
+  
   return (
     <main className='main-container'>
       <ToastContainer />
@@ -213,6 +218,13 @@ function ManagePatients() {
               type="textarea"
               value={currentPatient.medical_history}
               onChange={(e) => setCurrentPatient({ ...currentPatient, medical_history: e.target.value })}
+              className='mb-3'
+            />
+            <MDBInput
+              label="Password" // Add this input
+              type="password"
+              value={currentPatient.password}
+              onChange={(e) => setCurrentPatient({ ...currentPatient, password: e.target.value })}
               className='mb-3'
             />
           </Form>
