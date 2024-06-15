@@ -13,11 +13,18 @@ use Illuminate\Http\Request;
 Route::post('register', [ApiController::class, 'register']);
 Route::post('login', [ApiController::class, 'login']);
 
+
+
 // Authenticated routes
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('profile', [ApiController::class, 'profile']);
     Route::post('logout', [ApiController::class, 'logout']);
     Route::get('doctorlist', [DoctorController::class, 'index']);
+
+
+    Route::post('appointments', [AppointmentController::class, 'store']);
+    Route::get('appointments', [AppointmentController::class, 'index']);
+    Route::get('appointments/{id}', [AppointmentController::class, 'show']);
 
     // Doctor details route
     Route::get('doctor-details', function (Request $request) {
@@ -41,10 +48,6 @@ Route::middleware('auth:sanctum')->group(function () {
         } else {
             return response()->json(['message' => 'Patient not found'], 404);
         }
-
-    Route::post('appointments', [AppointmentController::class, 'store']);
-    Route::get('appointments', [AppointmentController::class, 'index']);
-    Route::get('appointments/{id}', [AppointmentController::class, 'show']);
     });
 
     // Admin routes
@@ -59,15 +62,16 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('doctors/add', [DoctorController::class, 'store']);
         Route::put('doctors/{id}', [DoctorController::class, 'update']);
         Route::delete('doctors/{id}', [DoctorController::class, 'destroy']);
+
+        // Patient routes
+        Route::get('admin-patients', [PatientController::class, 'index']);
+        Route::post('admin-patients/add', [PatientController::class, 'store']);
+        Route::put('admin-patients/{id}', [PatientController::class, 'update']);
+        Route::delete('admin-patients/{id}', [PatientController::class, 'destroy']);
     });
 
     // Receptionist routes
     Route::middleware('role:receptionist')->group(function () {
-        Route::get('users', [UserController::class, 'index']);
-        Route::post('users/add', [UserController::class, 'store']);
-        Route::put('users/{id}', [UserController::class, 'update']);
-        Route::delete('users/{id}', [UserController::class, 'destroy']);
-
         // Patient routes
         Route::get('reception-patients', [PatientController::class, 'index']);
         Route::post('reception-patients/add', [PatientController::class, 'store']);

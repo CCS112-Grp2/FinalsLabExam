@@ -7,7 +7,6 @@ import {
     MDBInput,
     MDBRow,
     MDBCol,
-    MDBCheckbox
 } from 'mdb-react-ui-kit';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -30,11 +29,13 @@ function Register() {
     const handleRegister = async () => {
         try {
             const response = await axios.post('http://127.0.0.1:8000/api/register', {
-                name: `${firstName} ${lastName}`,
-                email,
-                password,
-                role
+                first_name: firstName,
+                last_name: lastName,
+                email: email,
+                password: password,
+                role: role
             });
+
             // Handle successful registration
             console.log(response.data);
             toast.success('User registered successfully!');
