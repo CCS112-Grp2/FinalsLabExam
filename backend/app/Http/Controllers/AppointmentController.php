@@ -9,14 +9,6 @@ use Illuminate\Support\Facades\Validator;
 
 class AppointmentController extends Controller
 {
-    // Fetch all appointments (for doctor)
-    public function index()
-    {
-        $appointments = Appointment::all();
-        return response()->json($appointments);
-    }
-
-    // Create a new appointment
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -36,7 +28,12 @@ class AppointmentController extends Controller
         return response()->json($appointment, 201);
     }
 
-    // Fetch a single appointment (for patient)
+    public function index()
+    {
+        $appointments = Appointment::all();
+        return response()->json($appointments);
+    }
+
     public function show($id)
     {
         $appointment = Appointment::find($id);

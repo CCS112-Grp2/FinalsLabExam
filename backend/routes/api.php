@@ -41,6 +41,10 @@ Route::middleware('auth:sanctum')->group(function () {
         } else {
             return response()->json(['message' => 'Patient not found'], 404);
         }
+
+    Route::post('appointments', [AppointmentController::class, 'store']);
+    Route::get('appointments', [AppointmentController::class, 'index']);
+    Route::get('appointments/{id}', [AppointmentController::class, 'show']);
     });
 
     // Admin routes
