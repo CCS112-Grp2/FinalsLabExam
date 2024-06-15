@@ -1,0 +1,35 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f8f9fa;
+}
+
+.menu-icon {
+    cursor: pointer;
+}
+
+.header-left {
+    flex: 1;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    font-size: 1.5em;
+    margin: 0 10px; /* Adjust margin as needed for spacing */
+    cursor: pointer;
+}
+
+.user-icon {
+    position: relative;
+}

@@ -36,6 +36,11 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
           </Link>
         </li>
         <li className="sidebar-list-item">
+          <Link to="/dashboard/view-doctors" onClick={OpenSidebar}>
+            <BsPeopleFill className="icon" /> View Doctors
+          </Link>
+        </li>
+        <li className="sidebar-list-item">
           <Link to="/dashboard/view-appointments" onClick={OpenSidebar}>
             <BsCalendarCheckFill className="icon" /> View Appointments
           </Link>

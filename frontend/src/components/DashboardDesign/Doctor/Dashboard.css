@@ -102,6 +102,7 @@ body {
   padding: 20px 30px; /* Adjust padding for better touch/click area */
   font-size: 14px;
   transition: background-color 0.3s;
+  display: block; /* Make sure the item is a block element */
 }
 
 .sidebar-list-item:hover,
@@ -110,17 +111,20 @@ body {
   cursor: pointer;
 }
 
-.sidebar-list-item > a {
+.sidebar-list-item a {
   text-decoration: none;
   color: #9e9ea4;
-  display: flex;
-  align-items: center;
+  display: block; /* Make sure the link is a block element */
+  width: 100%; /* Ensure full item area is clickable */
   height: 100%; /* Ensure full item area is clickable */
+  transition: color 0.3s, background-color 0.3s; /* Smooth transition for hover effect */
 }
 
-.sidebar-list-item > a:hover {
+/* Hover effect for the link */
+.sidebar-list-item a:hover {
   text-decoration: none;
-  color: #9e9ea4;
+  color: #9e9ea4; /* or your desired hover color */
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .close_icon {

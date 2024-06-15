@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Header from '../DashboardDesign/Header';
-import Sidebar from '../DashboardDesign/Sidebar';
-import Home from '../DashboardDesign/Admin/Home';
-import ManagePatients from '../DashboardDesign/Admin/ManagePatients';
-import ManageDoctors from '../DashboardDesign/Admin/ManageDoctors';
-import ViewAppointments from '../DashboardDesign/Admin/ViewAppointments';
-import ViewMedicalRecords from '../DashboardDesign/Admin/ViewMedicalRecords';
-import '../DashboardDesign/Dashboard.css';
+import Header from '../DashboardDesign/Doctor/Header';
+import Sidebar from '../DashboardDesign/Doctor/Sidebar';
+import Home from '../DashboardDesign/Doctor/Home';
+import ViewDoctors from '../DashboardDesign/Doctor/ViewDoctors';
+import ManagePatients from '../DashboardDesign/Doctor/ManagePatients';
+import ViewAppointments from '../DashboardDesign/Doctor/ViewAppointments';
+import ViewMedicalRecords from '../DashboardDesign/Doctor/ViewMedicalRecords';
+import '../DashboardDesign/Doctor/Dashboard.css';
 
-function AdminDashboard() {
+function DoctorDashboard() {
     const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
 
     const OpenSidebar = () => {
@@ -23,8 +23,8 @@ function AdminDashboard() {
             <div className="main-container">
                 <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="view-doctors" element={<ViewDoctors />} />
                     <Route path="manage-patients" element={<ManagePatients />} />
-                    <Route path="manage-doctors" element={<ManageDoctors />} />
                     <Route path="view-appointments" element={<ViewAppointments />} />
                     <Route path="view-medical-records" element={<ViewMedicalRecords />} />
                 </Routes>
@@ -33,4 +33,4 @@ function AdminDashboard() {
     );
 }
 
-export default AdminDashboard;
+export default DoctorDashboard;
