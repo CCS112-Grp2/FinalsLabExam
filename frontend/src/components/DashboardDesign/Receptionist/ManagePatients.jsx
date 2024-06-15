@@ -19,7 +19,7 @@ function ManagePatients() {
   const fetchPatients = async () => {
     const token = localStorage.getItem('token');
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/patients', {
+      const response = await axios.get('http://127.0.0.1:8000/api/reception-patients', {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -55,7 +55,7 @@ function ManagePatients() {
   const handleDelete = async (id) => {
     const token = localStorage.getItem('token');
     try {
-      await axios.delete(`http://127.0.0.1:8000/api/patients/${id}`, {
+      await axios.delete(`http://127.0.0.1:8000/api/reception-patients/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -71,14 +71,14 @@ function ManagePatients() {
     const token = localStorage.getItem('token');
     try {
       if (isEditing) {
-        await axios.put(`http://127.0.0.1:8000/api/patients/${currentPatient.id}`, currentPatient, {
+        await axios.put(`http://127.0.0.1:8000/api/reception-patients/${currentPatient.id}`, currentPatient, {
           headers: {
             Authorization: `Bearer ${token}`
           }
         });
         toast.success('Patient updated successfully');
       } else {
-        const response = await axios.post('http://127.0.0.1:8000/api/patients/add', currentPatient, {
+        const response = await axios.post('http://127.0.0.1:8000/api/reception-patients/add', currentPatient, {
           headers: {
             Authorization: `Bearer ${token}`
           }

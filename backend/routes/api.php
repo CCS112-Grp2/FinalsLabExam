@@ -65,10 +65,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('users/{id}', [UserController::class, 'destroy']);
 
         // Patient routes
-        Route::get('patients', [PatientController::class, 'index']);
-        Route::post('patients/add', [DoctorController::class, 'store']);
-        Route::put('patients/{id}', [DoctorController::class, 'update']);
-        Route::delete('patients/{id}', [DoctorController::class, 'destroy']);
+        Route::get('reception-patients', [PatientController::class, 'index']);
+        Route::post('reception-patients/add', [PatientController::class, 'store']);
+        Route::put('reception-patients/{id}', [PatientController::class, 'update']);
+        Route::delete('reception-patients/{id}', [PatientController::class, 'destroy']);
     });
 
     // Doctor routes
