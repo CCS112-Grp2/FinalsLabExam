@@ -8,6 +8,7 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\MedicalRecordController;
 
+
 Route::post('register', [ApiController::class, 'register']);
 Route::post('login', [ApiController::class, 'login']);
 
@@ -22,6 +23,12 @@ Route::group(['middleware' => ['auth:sanctum', 'role:admin']], function () {
     Route::post('users/add', [UserController::class, 'store']);
     Route::put('users/{id}', [UserController::class, 'update']);
     Route::delete('users/{id}', [UserController::class, 'destroy']);
+
+    // Doctor routes
+    Route::get('doctors', [DoctorController::class, 'index']); // Define route for fetching doctors
+    Route::post('doctors/add', [DoctorController::class, 'store']);
+    Route::put('doctors/{id}', [DoctorController::class, 'update']);
+    Route::delete('doctors/{id}', [DoctorController::class, 'destroy']);
 });
 
 Route::group(['middleware' => ['auth:sanctum', 'role:doctor']], function () {
