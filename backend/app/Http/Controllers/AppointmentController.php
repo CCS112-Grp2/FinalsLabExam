@@ -15,7 +15,6 @@ class AppointmentController extends Controller
             'patient_id' => 'required|exists:patients,id',
             'doctor_id' => 'required|exists:doctors,id',
             'appointment_date' => 'required|date',
-            'status' => 'required|string|max:20',
             'reason' => 'required|string|max:255',
         ]);
 
@@ -23,7 +22,11 @@ class AppointmentController extends Controller
             return response()->json(['errors' => $validator->errors()], 400);
         }
 
-        $appointment = Appointment::create($request->all());
+        // Set status to 'Pending'
+        $appointmentData = $request->all();
+        $appointmentData['status'] = 'Pending';
+
+        $appointment = Appointment::create($appointmentData);
 
         return response()->json($appointment, 201);
     }

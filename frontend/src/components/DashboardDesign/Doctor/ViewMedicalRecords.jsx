@@ -258,4 +258,3 @@ function ViewMedicalRecords() {
 }
 
 export default ViewMedicalRecords;
-

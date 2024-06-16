@@ -7,6 +7,7 @@ use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\MedicalRecordController;
+use App\Http\Controllers\PatientAppointmentController;
 use Illuminate\Http\Request;
 
 // Public routes
@@ -77,6 +78,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('reception-patients/add', [PatientController::class, 'store']);
         Route::put('reception-patients/{id}', [PatientController::class, 'update']);
         Route::delete('reception-patients/{id}', [PatientController::class, 'destroy']);
+
+        // Existing routes
+        Route::post('schedule-appointments/add', [AppointmentController::class, 'store']);
+        Route::get('schedule-appointments', [AppointmentController::class, 'index']);
+        Route::get('schedule-appointments/{id}', [AppointmentController::class, 'show']);
     });
 
     // Doctor routes
@@ -100,6 +106,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('appointments', [AppointmentController::class, 'store']);
         Route::get('appointments/{id}', [AppointmentController::class, 'show']);
         Route::get('medical-records', [MedicalRecordController::class, 'index']);
+
+        Route::post('patient/appointments/add', [PatientAppointmentController::class, 'store']);
+        Route::get('patient/appointments', [PatientAppointmentController::class, 'index']);
+        Route::delete('patient/appointments/{id}', [PatientAppointmentController::class, 'destroy']); // Route for cancelling appointment
+        Route::put('patient/appointments/{id}', [PatientAppointmentController::class, 'update']); // Route for rescheduling appointment
+
     });
 });
 
