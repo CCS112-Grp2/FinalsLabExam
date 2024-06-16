@@ -164,6 +164,15 @@ function ViewMedicalRecords() {
         return `${year}-${month}-${day}`;
     };
 
+    // Function to get today's date in yyyy-mm-dd format
+    const getTodayDate = () => {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
+
     return (
         <main className='main-container'>
             <ToastContainer />
@@ -179,7 +188,7 @@ function ViewMedicalRecords() {
                             name="visit_date"
                             value={form.visit_date}
                             onChange={handleInputChange}
-                            min="1900-01-01"
+                            min={getTodayDate()}
                             max="2100-12-31"
                             required
                         />
@@ -229,7 +238,7 @@ function ViewMedicalRecords() {
                                 name="visit_date"
                                 value={form.visit_date}
                                 onChange={handleInputChange}
-                                min="1900-01-01"
+                                min={getTodayDate()}
                                 max="2100-12-31"
                                 required
                             />

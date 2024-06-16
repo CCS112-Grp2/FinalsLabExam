@@ -28,7 +28,6 @@ function ViewMedicalRecords() {
         }
     };
 
-    // Function to format date to yyyy-mm-dd
     const formatDate = (dateString) => {
         const dateObj = new Date(dateString);
         const year = dateObj.getFullYear();
