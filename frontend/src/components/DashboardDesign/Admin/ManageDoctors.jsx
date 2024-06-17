@@ -52,7 +52,6 @@ function ManageDoctors() {
     setShowModal(true);
   };
 
-
   const handleDelete = async (id) => {
     const token = localStorage.getItem('token');
     try {
@@ -71,19 +70,16 @@ function ManageDoctors() {
   const handleSave = async () => {
     const token = localStorage.getItem('token');
     try {
-      // Check if the password meets the length requirement
-      if (isEditing && currentDoctor.password.length < 8) {
+      if (isEditing && currentDoctor.password && currentDoctor.password.length < 8) {
         toast.error('Password must be at least 8 characters long');
         return;
       }
 
       const isValidEmail = (email) => {
-        // Regular expression for validating email format
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
       };
 
-      // Check if the email is in a valid format
       if (!isEditing && !isValidEmail(currentDoctor.email)) {
         toast.error('Invalid email format');
         return;
@@ -97,7 +93,7 @@ function ManageDoctors() {
         });
         toast.success('Doctor updated successfully');
       } else {
-        const response = await axios.post('http://127.0.0.1:8000/api/doctors/add', currentDoctor, {
+        await axios.post('http://127.0.0.1:8000/api/doctors/add', currentDoctor, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -105,33 +101,33 @@ function ManageDoctors() {
         toast.success('Doctor added successfully');
       }
       setShowModal(false);
-      fetchDoctors(); // Refresh the list of doctors after saving
+      fetchDoctors();
     } catch (error) {
       toast.error('Failed to save doctor: ' + (error.response?.data?.message || error.message));
     }
   };
 
   return (
-    <main className='main-container'>
+    <main className='main-container p-4'>
       <ToastContainer />
-      <div className='main-title'>
+      <div className='main-title d-flex justify-content-between align-items-center mb-4'>
         <h3>Manage Doctors</h3>
-        <Button variant="primary" className="mb-5" onClick={handleAdd}>Add Doctor</Button>
+        <Button variant="primary" onClick={handleAdd}>Add Doctor</Button>
       </div>
       <Container>
         {doctors.map(doctor => (
           <Row className="mb-3" key={doctor.id}>
-            <Col key={doctor.id}>
+            <Col>
               <Card className='mb-1' style={{ backgroundColor: 'white', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
                 <Card.Body>
                   <h5 className='card-title'>{doctor.first_name} {doctor.last_name}</h5>
-                  <p className='card-text'>Email: {doctor.email}</p>
-                  <p className='card-text'>Specialization: {doctor.specialization}</p>
-                  <p className='card-text'>License Number: {doctor.license_number}</p>
-                  <p className='card-text'>Phone: {doctor.phone}</p>
+                  <p className='card-text'><strong>Email:</strong> {doctor.email}</p>
+                  <p className='card-text'><strong>Specialization:</strong> {doctor.specialization}</p>
+                  <p className='card-text'><strong>License Number:</strong> {doctor.license_number}</p>
+                  <p className='card-text'><strong>Phone:</strong> {doctor.phone}</p>
                   <div className="d-flex justify-content-end">
                     <Button variant="warning" className="mr-2" onClick={() => handleEdit(doctor)}>Edit</Button>
-                    <Button variant="danger" className="mr-2" onClick={() => handleDelete(doctor.id)}>Delete</Button>
+                    <Button variant="danger" onClick={() => handleDelete(doctor.id)}>Delete</Button>
                   </div>
                 </Card.Body>
               </Card>
